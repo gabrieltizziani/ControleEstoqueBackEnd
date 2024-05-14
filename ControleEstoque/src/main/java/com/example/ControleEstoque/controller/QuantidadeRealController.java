@@ -26,10 +26,32 @@ public class QuantidadeRealController {
         if (optionalProduto.isPresent()) {
             Produto produto = optionalProduto.get();
             int quantidadeReal = quantidadeRealService.calcularQuantidadeReal(produto);
-            return ResponseEntity.ok(quantidadeReal);
+            float valorProduto = quantidadeRealService.calcularValorProduto(produto);
+
+            // Criar um objeto para retornar a quantidade real e o valor total
+            QuantidadeValorResponse response = new QuantidadeValorResponse(quantidadeReal, valorProduto);
+
+            return ResponseEntity.ok(response);
         } else {
             String mensagem = "O produto com o ID " + idProduto + " não foi encontrado.";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagem);
+        }
+    }
+    private static class QuantidadeValorResponse {
+        private final int quantidadeReal;
+        private final float valorProduto;
+
+        public QuantidadeValorResponse(int quantidadeReal, float valorProduto) {
+            this.quantidadeReal = quantidadeReal;
+            this.valorProduto = valorProduto;
+        }
+
+        public int getQuantidadeReal() {
+            return quantidadeReal;
+        }
+
+        public float getValorProduto() {
+            return valorProduto;
         }
     }
 }

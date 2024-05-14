@@ -29,6 +29,17 @@ public class QuantidadeRealService {
         return quantidadeEntrada - quantidadeSaida;
     }
 
+    public float calcularValorProduto(Produto produto) {
+        List<Entrada> entradas = entradaRepository.findByProduto(produto);
+        float valorProduto = 0;
+
+        for (Entrada entrada : entradas) {
+            valorProduto += entrada.getQuantidadeProdutoEntrada() * produto.getPrecoProduto();
+        }
+
+        return valorProduto;
+    }
+
     private int calcularTotalEntradas(List<Entrada> entradas) {
         int quantidadeTotal = 0;
         for (Entrada entrada : entradas) {
@@ -44,6 +55,4 @@ public class QuantidadeRealService {
         }
         return quantidadeTotal;
     }
-
-
 }
