@@ -17,18 +17,15 @@ public class SaidaController {
 @Autowired
     SaidaService saidaService;
 @GetMapping
-@CrossOrigin(origins = "http://localhost:5174")
     public List<Saida> listarSaida(){
     return saidaService.listarSaida();}
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5174")
     public Saida criarSaida(@Valid @RequestBody Saida saida) {
         return saidaService.criarSaida(saida);
     }
 
     @PutMapping("/{idSaida}")
-    @CrossOrigin(origins = "http://localhost:5174")
     public ResponseEntity<?> editarSaida(@PathVariable Long idSaida, @RequestBody Saida saida){
         if(saidaService.editarSaida(saida, idSaida) == null){
             String mensagem = "o id informado não existe na base de dados";
@@ -38,7 +35,6 @@ public class SaidaController {
     }
 
     @DeleteMapping("/{idSaida}")
-    @CrossOrigin(origins = "http://localhost:5174")
     public ResponseEntity<?> excluirSaida(@PathVariable Long idSaida) {
         if (saidaService.excluirSaida(idSaida)) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

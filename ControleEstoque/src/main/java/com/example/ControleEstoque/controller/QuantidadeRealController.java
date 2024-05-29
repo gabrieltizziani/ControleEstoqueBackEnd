@@ -20,7 +20,6 @@ public class QuantidadeRealController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping("/{idProduto}")
-    @CrossOrigin("http://localhost:5174")
     public ResponseEntity<?> getQuantidadeRealProduto(@PathVariable Long idProduto) {
         Optional<Produto> optionalProduto = produtoRepository.findById(idProduto);
         if (optionalProduto.isPresent()) {

@@ -24,13 +24,12 @@ public class EntradaController {
     private EntradaService entradaService;
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:5174") // Permitindo acesso apenas deste origin
     public List<Entrada> listarEntrada() {
         return entradaService.listarEntrada();
     }
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5174") // Permitindo acesso apenas deste origin
+
     public ResponseEntity<Entrada> criarEntrada(@Valid @RequestBody Entrada entrada) {
         Entrada novaEntrada = entradaService.criarEntrada(entrada);
         if (novaEntrada != null) {
@@ -41,7 +40,6 @@ public class EntradaController {
     }
 
     @PutMapping("/{idEntrada}")
-    @CrossOrigin(origins = "http://localhost:5174") // Permitindo acesso apenas deste origin
     public ResponseEntity<?> editarEntrada(@PathVariable Long idEntrada, @Valid @RequestBody Entrada entrada) {
         Entrada entradaEditada = entradaService.editarEntrada(entrada, idEntrada);
         if (entradaEditada != null) {
@@ -52,7 +50,6 @@ public class EntradaController {
     }
 
     @DeleteMapping("/{idEntrada}")
-    @CrossOrigin(origins = "http://localhost:5174") // Permitindo acesso apenas deste origin
     public ResponseEntity<?> excluirEntrada(@PathVariable Long idEntrada) {
         if (entradaService.excluirEntrada(idEntrada)) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

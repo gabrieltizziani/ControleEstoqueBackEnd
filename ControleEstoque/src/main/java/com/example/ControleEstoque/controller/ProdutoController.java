@@ -26,19 +26,16 @@ public class ProdutoController {
 
 
     @GetMapping
-    @CrossOrigin("http://localhost:5174")
     public List<Produto> listarProduto(){
         return produtoService.listarProduto();
     }
 
     @PostMapping
-    @CrossOrigin("http://localhost:5174")
     public Produto criarProduto(@Valid @RequestBody Produto produto) {
         return produtoService.criarProduto(produto);
     }
 
     @PutMapping("/{idProduto}")
-    @CrossOrigin("http://localhost:5174")
     public ResponseEntity<?> editarProduto(@PathVariable Long idProduto, @RequestBody Produto produto){
         Produto produtoEditado = produtoService.editarProduto(produto, idProduto);
         if (produtoEditado != null) {
@@ -50,7 +47,6 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{idProduto}")
-    @CrossOrigin("http://localhost:5174")
     public ResponseEntity<?> excluirProduto(@PathVariable Long idProduto){
         if(produtoService.excluirProduto(idProduto)){
             String mensagem = "A deleção do produto com o ID " + idProduto + " foi realizada com sucesso.";
@@ -62,7 +58,6 @@ public class ProdutoController {
     }
 
     @GetMapping("/{nomeProduto}")
-    @CrossOrigin("http://localhost:5174")
     public Optional<Produto> getProdutoPorNome(@PathVariable("nomeProduto") String nomeProduto) {
         return produtoRepository.findByNomeProduto(nomeProduto);
     }

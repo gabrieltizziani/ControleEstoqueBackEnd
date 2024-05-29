@@ -18,20 +18,19 @@ public class FuncionarioController {
     FuncionarioService funcionarioService;
 
     @GetMapping
-    @CrossOrigin("http://localhost:5174")
+
     public List<Funcionario> listarFuncionario() {
         return funcionarioService.listarFuncionario();
     }
 
 
     @PostMapping
-    @CrossOrigin("http://localhost:5174")
+
     public Funcionario criarFuncionario(@Valid @RequestBody Funcionario funcionario) {
         return funcionarioService.criarFuncionario(funcionario);
     }
 
     @PutMapping("/{idFuncionario}")
-    @CrossOrigin("http://localhost:5174")
     public ResponseEntity<?> editarFuncionario(@PathVariable Long idFuncionario, @RequestBody Funcionario funcionario) {
         if (funcionarioService.editarFuncionario(funcionario, idFuncionario) == null) {
             String mensagem = " o id informado nao existe na base de dados";
@@ -41,7 +40,6 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{idFuncionario}")
-    @CrossOrigin("http://localhost:5174")
     public ResponseEntity<?> excluirFuncionario(@PathVariable Long idFuncionario) {
         if (funcionarioService.excluirFuncionario(idFuncionario)) {
             String mensagem = "A deleção do id: " + idFuncionario + " foi realizada com sucesso.";

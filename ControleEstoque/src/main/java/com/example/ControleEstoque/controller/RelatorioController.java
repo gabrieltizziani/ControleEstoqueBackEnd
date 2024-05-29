@@ -32,7 +32,6 @@ public class RelatorioController {
     private FuncionarioRepository funcionarioRepository;
 
     @GetMapping("/entradas")
-    @CrossOrigin(origins = "http://localhost:5174")
     public ResponseEntity<Map<String, Object>> gerarRelatorioEntradas(
             @RequestParam("dataInicial") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicial,
             @RequestParam("dataFinal") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal) {
