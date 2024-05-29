@@ -31,14 +31,21 @@ public class QuantidadeRealService {
 
     public float calcularValorProduto(Produto produto) {
         List<Entrada> entradas = entradaRepository.findByProduto(produto);
+        List<Saida> saidas = saidaRepository.findByProduto(produto);
+
         float valorProduto = 0;
 
         for (Entrada entrada : entradas) {
             valorProduto += entrada.getQuantidadeProdutoEntrada() * produto.getPrecoProduto();
         }
 
+        for (Saida saida : saidas) {
+            valorProduto -= saida.getQuantidadeProduto() * produto.getPrecoProduto();
+        }
+
         return valorProduto;
     }
+
 
     private int calcularTotalEntradas(List<Entrada> entradas) {
         int quantidadeTotal = 0;

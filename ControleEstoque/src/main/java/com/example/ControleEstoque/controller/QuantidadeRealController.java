@@ -37,6 +37,7 @@ public class QuantidadeRealController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagem);
         }
     }
+
     private static class QuantidadeValorResponse {
         private final int quantidadeReal;
         private final float valorProduto;
@@ -54,4 +55,5 @@ public class QuantidadeRealController {
             return valorProduto;
         }
     }
+
 }
