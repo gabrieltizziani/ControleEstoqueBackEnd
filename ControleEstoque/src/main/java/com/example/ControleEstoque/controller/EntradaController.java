@@ -29,7 +29,6 @@ public class EntradaController {
     }
 
     @PostMapping
-
     public ResponseEntity<Entrada> criarEntrada(@Valid @RequestBody Entrada entrada) {
         Entrada novaEntrada = entradaService.criarEntrada(entrada);
         if (novaEntrada != null) {

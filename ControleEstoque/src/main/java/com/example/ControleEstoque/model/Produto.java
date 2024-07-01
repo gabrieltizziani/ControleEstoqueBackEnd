@@ -52,4 +52,7 @@ public class Produto {
         this.precoProduto = precoProduto;
     }
 
+    public void setQuantidadeReal(float i) {
+
+    }
 }

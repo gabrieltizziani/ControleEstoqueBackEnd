@@ -24,7 +24,7 @@ public class QuantidadeRealController {
         Optional<Produto> optionalProduto = produtoRepository.findById(idProduto);
         if (optionalProduto.isPresent()) {
             Produto produto = optionalProduto.get();
-            int quantidadeReal = quantidadeRealService.calcularQuantidadeReal(produto);
+            float quantidadeReal = quantidadeRealService.calcularQuantidadeReal(produto);
             float valorProduto = quantidadeRealService.calcularValorProduto(produto);
 
             // Criar um objeto para retornar a quantidade real e o valor total
@@ -37,16 +37,17 @@ public class QuantidadeRealController {
         }
     }
 
+
     private static class QuantidadeValorResponse {
-        private final int quantidadeReal;
+        private final float quantidadeReal;
         private final float valorProduto;
 
-        public QuantidadeValorResponse(int quantidadeReal, float valorProduto) {
+        public QuantidadeValorResponse(float quantidadeReal, float valorProduto) {
             this.quantidadeReal = quantidadeReal;
             this.valorProduto = valorProduto;
         }
 
-        public int getQuantidadeReal() {
+        public float getQuantidadeReal() {
             return quantidadeReal;
         }
 
@@ -54,5 +55,4 @@ public class QuantidadeRealController {
             return valorProduto;
         }
     }
-
 }

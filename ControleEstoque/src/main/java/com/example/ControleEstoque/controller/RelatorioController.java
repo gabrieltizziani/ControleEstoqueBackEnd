@@ -26,6 +26,7 @@ public class RelatorioController {
     @Autowired
     private RelatorioService relatorioService;
 
+    @SuppressWarnings("unused")
     @Autowired
     private EntradaRepository entradaRepository;
     @Autowired

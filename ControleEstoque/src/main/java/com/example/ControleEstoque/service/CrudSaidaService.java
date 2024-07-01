@@ -1,6 +1,6 @@
 package com.example.ControleEstoque.service;
 
-import com.example.ControleEstoque.model.Entrada;
+
 import com.example.ControleEstoque.model.Saida;
 
 import java.util.List;

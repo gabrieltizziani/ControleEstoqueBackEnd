@@ -16,6 +16,8 @@ public class EntradaService implements CrudEntradaService<Entrada>{
     EntradaRepository entradaRepository;
     @Autowired
     ProdutoRepository produtoRepository;
+    @Autowired
+    QuantidadeRealService quantidadeRealService;
 
     @Override
     public List<Entrada> listarEntrada(){
@@ -34,36 +36,61 @@ public class EntradaService implements CrudEntradaService<Entrada>{
             entrada.setQuantidadeProdutoEntrada(entrada.getQuantidadeProdutoEntrada());
             entrada.setTipo(entrada.getTipo());
             entrada.setFornecedor(entrada.getFornecedor());
-            entrada.setNotaFiscal((entrada.getNotaFiscal()));
+            entrada.setNotaFiscal(entrada.getNotaFiscal());
 
             // Calcular o valor total da entrada
             float valorTotal = calcularValorTotal(entrada);
             entrada.setValorTotal(valorTotal);
 
-            return entradaRepository.save(entrada);
+            Entrada novaEntrada = entradaRepository.save(entrada);
+
+            // Atualizar quantidade real do produto
+            produto.setQuantidadeReal(quantidadeRealService.calcularQuantidadeReal(produto));
+            produtoRepository.save(produto);
+
+            return novaEntrada;
         }
         return null;
     }
+
     @Override
     public Entrada editarEntrada(Entrada entrada, Long idEntrada) {
         if (entradaRepository.existsById(idEntrada)) {
             entrada.setIdEntrada(idEntrada);
-            return entradaRepository.save(entrada);
+            Entrada entradaEditada = entradaRepository.save(entrada);
+
+            // Atualizar quantidade real do produto
+            Produto produto = entrada.getProduto();
+            produto.setQuantidadeReal(quantidadeRealService.calcularQuantidadeReal(produto));
+            produtoRepository.save(produto);
+
+            return entradaEditada;
         }
         return null;
     }
+
     @Override
     public boolean excluirEntrada(Long idEntrada) {
         if (entradaRepository.existsById(idEntrada)) {
-            entradaRepository.deleteById(idEntrada);
-            return true;
+            Entrada entrada = entradaRepository.findById(idEntrada).orElse(null);
+            if (entrada != null) {
+                entradaRepository.deleteById(idEntrada);
+
+                // Atualizar quantidade real do produto
+                Produto produto = entrada.getProduto();
+                produto.setQuantidadeReal(quantidadeRealService.calcularQuantidadeReal(produto));
+                produtoRepository.save(produto);
+
+                return true;
+            }
         }
         return false;
     }
+
     @Override
     public float calcularValorTotal(Entrada entrada) {
         float precoProduto = entrada.getProduto().getPrecoProduto();
-        int quantidade = entrada.getQuantidadeProdutoEntrada();
+        float quantidade = entrada.getQuantidadeProdutoEntrada();
         return precoProduto * quantidade;
     }
 }

@@ -2,9 +2,17 @@ package com.example.ControleEstoque.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Entrada {
     @Id
@@ -21,7 +29,7 @@ public class Entrada {
 
     @NotNull(message = "O campo quantidade não pode ser nulo.")
     @Column(nullable = false)
-    private int quantidadeProdutoEntrada;
+    private float quantidadeProdutoEntrada;
 
     @NotNull(message = "O campo tipo não pode ser nulo.")
     @Column(nullable = false)
@@ -29,89 +37,14 @@ public class Entrada {
 
     @NotNull(message = "O campo tipo não pode ser nulo.")
     @Column(nullable = false)
-    private  String fornecedor;
+    private String fornecedor;
 
     @Column(nullable = false)
     private float valorTotal;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private int notaFiscal;
 
-    public Entrada() {
-    }
-
-    public Entrada(Long idEntrada, LocalDate dataEntrada, Produto produto, int quantidadeProdutoEntrada, String tipo, String fornecedor, float valorTotal, int notaFiscal) {
-        this.idEntrada = idEntrada;
-        this.dataEntrada = dataEntrada;
-        this.produto = produto;
-        this.quantidadeProdutoEntrada = quantidadeProdutoEntrada;
-        this.tipo = tipo;
-        this.fornecedor = fornecedor;
-        this.valorTotal = valorTotal;
-        this.notaFiscal = notaFiscal;
-    }
-
-    public Long getIdEntrada() {
-        return idEntrada;
-    }
-
-    public void setIdEntrada(Long idEntrada) {
-        this.idEntrada = idEntrada;
-    }
-
-    public LocalDate getDataEntrada() {
-        return dataEntrada;
-    }
-
-    public void setDataEntrada(LocalDate dataEntrada) {
-        this.dataEntrada = dataEntrada;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public int getQuantidadeProdutoEntrada() {
-        return quantidadeProdutoEntrada;
-    }
-
-    public void setQuantidadeProdutoEntrada(int quantidadeProdutoEntrada) {
-        this.quantidadeProdutoEntrada = quantidadeProdutoEntrada;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(String fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    public float getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(float valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public int getNotaFiscal() {
-        return notaFiscal;
-    }
-
-    public void setNotaFiscal(int notaFiscal) {
-        this.notaFiscal = notaFiscal;
-    }
 }
+
+

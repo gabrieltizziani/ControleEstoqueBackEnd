@@ -1,10 +1,10 @@
 package com.example.ControleEstoque.model;
 
-import io.micrometer.common.util.StringUtils;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
